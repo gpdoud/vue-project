@@ -1,0 +1,51 @@
+<script setup>
+  import { computed, ref, onMounted, watch } from 'vue';
+  import Header from './components/Header.vue'
+
+  const fn = ref("Greg");
+  const ln = ref("Doud");
+  const showName = ref(true);
+  const items = ref(["ABC", "DEF", "GHI"])
+  const nbr = ref(0);
+
+  const name = computed(() => { return fn.value + " " + ln.value });
+
+  const chgFn = () => {
+    fn.value = "Gregory";
+  }
+  const toggleShowName = (tf) => {
+    showName.value = !showName.value;
+  }
+  onMounted(() => {
+    console.log("Mounted ...");
+  })
+  const inc = () => {
+    nbr.value++;
+  }
+  watch(nbr, (x) => {
+    console.warn("nbr has changed to ", x );
+  });
+</script>
+
+<template>
+  <Header name="Gregory" />
+  <div v-if="showName">  
+    <h1 >App.vue by {{ name }}</h1>
+  </div>
+  <div v-else>
+    <h1 >Name is hidden</h1>
+  </div>
+  <button @click="chgFn">Change</button>
+  <button @click="toggleShowName">Show/Hide Name</button>
+  <div>
+    <ul>
+      <li v-for="(item, idx) in items">
+        {{ idx }} : {{  item }}
+      </li>
+    </ul>
+  </div>
+  <button @click="inc" class="btn btn-primary">Increment</button>
+</template>
+
+<style scoped>
+</style>
