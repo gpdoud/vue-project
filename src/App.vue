@@ -1,6 +1,7 @@
 <script setup>
   import { computed, ref, onMounted, watch } from 'vue';
   import Header from './components/Header.vue'
+  import MyComponent from './components/MyComponent.vue';
 
   const fn = ref("Greg");
   const ln = ref("Doud");
@@ -25,9 +26,14 @@
   watch(nbr, (x) => {
     console.warn("nbr has changed to ", x );
   });
+
+  const McName = ref("Greg");
+  const McDay = ref("Christmas Eve 2022");
+  const McDom = ref(24);
 </script>
 
 <template>
+  <MyComponent :name="McName" :day="McDay" :day-of-mo="McDom"  />
   <Header name="Gregory" />
   <div v-if="showName">  
     <h1 >App.vue by {{ name }}</h1>
